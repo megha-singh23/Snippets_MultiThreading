@@ -7,7 +7,10 @@ public class MyThread extends Thread{
         for(int i=0;i<=10;i++){
             // System.out.println("Child Thread..........");
             System.out.println(Thread.currentThread().getName());
+
         }    
+        // Thread.currentThread().setPriority(4);
+        System.out.println(Thread.currentThread().getPriority());
     }
 
     public void run(int i){

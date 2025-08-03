@@ -65,3 +65,25 @@ It is highly recommended to override run method otherwise don't go for multithre
     But in the second aproch while implementing Runnable interface we can extend any other class 
       Hence we won't miss any inheritance benefit because of above reason implementing runnable interface 
       is recommended then extending Thread class
+
+------Thread's Priority-------------
+->Every Thread has a priority in java even it is a default priority provided by JVM and custom priority
+ provided by programmer
+Thread class defines some following constants to represent some standard priorities:-
+ #Thread.MIN_PRIORITY- 1
+ #Thread.NORM_PRIORITY- 5
+ #Thread.MAX_PRIORITY- 10
+
+->Thread Scheduler will use priorities while allocating processor. The Thread which is having highest 
+priority will get a chance first. 
+**If two Threads having same priority then we cann't accept a exact execution order it depends on Thread
+Scheduler
+
+**The default priority only for the main thread is 5. But for all remaining threads default priority will be inherited 
+from parent to child i.e whatever priority parent thread has the same priority will be there for the child thread.
+
+
+->We can prevent a Thread execution by using the following methods:
+   *yield()
+   *join()
+   *sleep()
