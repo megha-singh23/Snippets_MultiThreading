@@ -19,6 +19,6 @@ public class MyThread extends Thread{
 
     // public void start(){ //it is not recommended to override start() method otherwise don't go for multithreadng concept
     // super.start(); responsible for executing run() method 
-    //System.out.println("start method..."); this is still executed by main thread
+    //System.out.println("start method..."); this is still e xecuted by main thread
     // }
 }

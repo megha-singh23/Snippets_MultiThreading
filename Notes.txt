@@ -1,6 +1,6 @@
 #Multitasking
 
--> Executing several tasks simultaneously is  a concept of multitasking .
+->Executing several tasks simultaneously is  a concept of multitasking .
 ->There are two types of multitasking 
     * Process-based multitasking
     * Thread-based multitasking
@@ -82,8 +82,22 @@ Scheduler
 **The default priority only for the main thread is 5. But for all remaining threads default priority will be inherited 
 from parent to child i.e whatever priority parent thread has the same priority will be there for the child thread.
 
-
 ->We can prevent a Thread execution by using the following methods:
-   *yield()
-   *join()
-   *sleep()
+   *yield()->This method causes to pause current executing thread to give a chance of waiting threads of same priority.If
+        there is no waiting thread or all waiting threads have low priority then same thread can continue its execution
+        If multiple threads are waiting with same priority then which waiting thread will get the chance we can't accpect it depends on thread scheduler.
+   
+   *join()->If a thread want to wait until completing some other thread then we should go for join() method.
+        for example, if a thread t1 wants to wait until completing t2 then t1 has to call t2.join(). If t1 executes 
+        t2.join() then immediately t1 will be entered into waiting state until t2 completes.Once t2 completes then t1 can continue its execution. 
+        Every join method throws InterruptedException which is checked Exception and hence compulsory we should
+        handle this exception otherwise we will get compile time error 
+
+   *sleep()-> If a thread don't want to perform any operations for a particular amount of time then we should go for
+        sleep method 
+        Every sleep method throws InterruptedException which is checked Exception and hence compulsory we should
+        handle this exception otherwise we will get compile time error 
+
+----------how a thread can interrupt another thread?
+    A thread can interrupt a sleeping thread or waiting thread by using interrupt() method of Thread class.
+    
