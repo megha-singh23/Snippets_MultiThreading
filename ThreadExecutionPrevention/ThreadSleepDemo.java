@@ -7,6 +7,7 @@ public class ThreadSleepDemo {
         t.start();
 
         t.interrupt();
+        
 
         System.out.println("End of main");
 

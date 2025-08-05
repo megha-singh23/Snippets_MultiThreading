@@ -101,3 +101,40 @@ from parent to child i.e whatever priority parent thread has the same priority w
 ----------how a thread can interrupt another thread?
     A thread can interrupt a sleeping thread or waiting thread by using interrupt() method of Thread class.
     
+-------------------Syncronization in MultiThreading-------------
+
+    syncronized is a modifier applicable only for methods and blocks but not for classes and variables.
+If multiple threads are trying to operate simultaneously on the same java object then there may be a chance of 
+data inconsistency problem
+
+To overcome this problem we should go for syncronized keyword if a method or block declared as a syncronized then
+at a time only one thread is allowed to execute that method or block on the given object so that data inconsistency
+problem will be resolved
+
+**the main advantage of syncronized keyword is we can resolve data inconsistency problems but the main 
+disadvantage of syncronized keyword is it increases waiting time of threads and creates performance problems and hence,
+if there is no specific requirements then it is not recommended to use syncronized keyword.
+
+->Internally, syncronization concept is implemented by using lock, every object in java has a unique lock whenever 
+we are using syncronized keyword then only lock concept will come into the picture. 
+If a thread wants to execute syncronized method on the given object first, it has to get lock of that object .Once
+thread got the lock then it is allowed to execute any syncronized method on that object.Once method execution 
+completes automatically thread releases the lock. Acquiring and releasing lock internally takes care by JVM and programmer is not responsible for this activity
+
+**while a thread executing syncronized method on the given object the remaining threads are not allowed to execute any syncronization method 
+on the same object but remaining threads are allowed to execute non-syncronized methods simultaneously.
+Lock concept is implemented based on object but not based on method 
+
+->syncronized area - wherever we are performing update operation[Add/delete/update/replace] i.e, where state of object changing
+non-syncronized area- wherever object state won't be changed like read() operation
+
+For Example: class ReservationSystem{
+
+    checkAvailabilty{ //non-syncronized
+        read() operation
+    }
+    syncronized bookticket(){ //syncronized method
+        update() operation
+    }
+}
+
