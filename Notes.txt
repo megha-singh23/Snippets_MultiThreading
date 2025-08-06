@@ -101,40 +101,114 @@ from parent to child i.e whatever priority parent thread has the same priority w
 ----------how a thread can interrupt another thread?
     A thread can interrupt a sleeping thread or waiting thread by using interrupt() method of Thread class.
     
--------------------Syncronization in MultiThreading-------------
+-------------------Synchronization in MultiThreading-------------
 
-    syncronized is a modifier applicable only for methods and blocks but not for classes and variables.
+    Synchronized is a modifier applicable only for methods and blocks but not for classes and variables.
 If multiple threads are trying to operate simultaneously on the same java object then there may be a chance of 
 data inconsistency problem
 
-To overcome this problem we should go for syncronized keyword if a method or block declared as a syncronized then
+To overcome this problem we should go for synchronized keyword if a method or block declared as a synchronized then
 at a time only one thread is allowed to execute that method or block on the given object so that data inconsistency
 problem will be resolved
 
-**the main advantage of syncronized keyword is we can resolve data inconsistency problems but the main 
-disadvantage of syncronized keyword is it increases waiting time of threads and creates performance problems and hence,
-if there is no specific requirements then it is not recommended to use syncronized keyword.
+**the main advantage of synchronized keyword is we can resolve data inconsistency problems but the main 
+disadvantage of synchronized keyword is it increases waiting time of threads and creates performance problems and hence,
+if there is no specific requirements then it is not recommended to use synchronized keyword.
 
 ->Internally, syncronization concept is implemented by using lock, every object in java has a unique lock whenever 
-we are using syncronized keyword then only lock concept will come into the picture. 
-If a thread wants to execute syncronized method on the given object first, it has to get lock of that object .Once
-thread got the lock then it is allowed to execute any syncronized method on that object.Once method execution 
+we are using synchronized keyword then only lock concept will come into the picture. 
+If a thread wants to execute synchronized method on the given object first, it has to get lock of that object .Once
+thread got the lock then it is allowed to execute any synchronized method on that object.Once method execution 
 completes automatically thread releases the lock. Acquiring and releasing lock internally takes care by JVM and programmer is not responsible for this activity
 
-**while a thread executing syncronized method on the given object the remaining threads are not allowed to execute any syncronization method 
-on the same object but remaining threads are allowed to execute non-syncronized methods simultaneously.
+**while a thread executing synchronized method on the given object the remaining threads are not allowed to execute any syncronization method 
+on the same object but remaining threads are allowed to execute non-synchronized methods simultaneously.
 Lock concept is implemented based on object but not based on method 
 
-->syncronized area - wherever we are performing update operation[Add/delete/update/replace] i.e, where state of object changing
-non-syncronized area- wherever object state won't be changed like read() operation
+->synchronized area - wherever we are performing update operation[Add/delete/update/replace] i.e, where state of object changing
+non-synchronized area- wherever object state won't be changed like read() operation
 
 For Example: class ReservationSystem{
 
-    checkAvailabilty{ //non-syncronized
+    checkAvailabilty{ //non-synchronized
         read() operation
     }
-    syncronized bookticket(){ //syncronized method
+    synchronized bookticket(){ //synchronized method
         update() operation
     }
 }
+
+----------------------------------Synchronized block---------------------------
+If very few lines of the code requires syncronization then it is not recommended to declare entire method as 
+synchronized, we have to enclose those few lines of the code by using synchronized block.
+
+The main advantage of synchronized block over synchronized method is it reduces waiting time of threads and improves
+performance of the application.
+
+We can declare syncronized block as follows:
+1) to get a lock of current object   |    2) to get a lock of a particular object b  |    3)To get a class level lock               |
+    syncronized(this){               |        syncronized(b){                        |         syncronized(Dispaly.class){          |
+        -------                      |            -----                              |           ----                               |
+    }                                |          }                                    |           }                                  |
+                                     |                                               |                                              |
+If a thread got lock of current      |  if a thread got lock of particular object 'b'| if a thraed got class level lock of 'Display'| 
+object then only it is allowed to    |  then only it is allowed to execute this area | class then, only it is allowed to execute    |
+execute this area                    |                                               |  this area                                   |
+
+**Lock concept applicable for object types and class types but not for primitive type hence, we can't pass 
+primitive type as a agruments otherwise we will get compile time error saying unexpected type found in reference
+
+For example;
+            int x=10;
+                synchronized(x){----}         shows above error of unexpected reference
+
+
+----*Interview based Questions-----
+Q1] What is synchronized keyword and where we can apply?
+Q2] Explain advantage of synchronized keyword?
+Q3] Explain disadvantage of synchronized keyword?
+Q4] What is Race condition?
+    Ans- if multiple thraeds are operating on same java object then there may be a chance of data inconsistency 
+        problem this is called race condition. we can overcome this problem by using synchronized keyword.
+
+Q5] What is Object Lock and when it is required? whenever thread wants to execute instance synchronized method it is required object level lock. 
+Q6] What is class level lock and when it is required? whenever thread wants to execute static synchronized method it is required class level lock.
+Q7] What is the difference b/w  class level lock and object level lock?
+Q8] what is synchronized block?
+Q9] how to declare synchronized block to get a lock of current object?
+Q10] how to declare synchronized block to get a class level lock?
+Q11] What is a advantage of synchronized block over synchronized method? performance increases by reducing waiting time of the threads
+Q12] Is a thread can require multiple locks simultaneously? Yes, from different objects.
+For Example;
+Class X{
+    public synchronized void m1(){
+        //here, thread has lock of X object
+        Y y=new Y();
+
+        synchronized(y){
+            //here thread has locks of X and Y
+            Z z=new Z();
+            synchronized(z){
+                ------ //here thread has locks of X,Y,Z 
+            }
+            ---
+        }
+    }
+}
+Q13] What is synchronized statement?(Interview people created terminology: The statements present in synchronized
+method and synchronized block are called synchronized statements.)
+
+-------------------Inter-Thread Communication-------------------------------
+
+Two threads can communicate with each other by using wait(), notify(), and notifyAll() methods. The thread which is 
+expecting updation  is responsible to call wait() method then immediately the thread will enter into waiting  state.
+
+The thread which is responsible to perform updation after performing updation it is responsible to call 
+notify() method then waiting thread will get that modification and continue its execution with those updated items.
+
+**wait(), notify(), and notifyAll() methods present in Object class not in Thread class because thread can call 
+these methods on any java objects.
+
+
+
 
