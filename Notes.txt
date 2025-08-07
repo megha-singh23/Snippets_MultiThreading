@@ -147,7 +147,7 @@ performance of the application.
 
 We can declare syncronized block as follows:
 1) to get a lock of current object   |    2) to get a lock of a particular object b  |    3)To get a class level lock               |
-    syncronized(this){               |        syncronized(b){                        |         syncronized(Dispaly.class){          |
+    syncronized(this){               |        syncronized(b){                        |         syncronized(Display.class){          |
         -------                      |            -----                              |           ----                               |
     }                                |          }                                    |           }                                  |
                                      |                                               |                                              |
@@ -248,3 +248,15 @@ We can use notifyAll() to give the notification for all waiting threads of a par
 multiple threads are notifies but execution will be performed one by one because threads require lock and only 
 one lock is available.
 on which object we are calling wait() method thread requires lock of that particular object
+
+->DeadLock- If two threads are waiting for each other forever such type of infinite waiting is called DeadLock.
+
+synchronized keyword is the only reason for deadlock situation hence, while using synchronized keyword we have to
+take special care. 
+There is no resolution technique for deadlock but several prevention technique are available.
+
+----------------------Deadlock Vs Starvation---------------------
+Long waiting of a thread where waiting never ends is called deadlock whereas long waiting of a thread where 
+waiting ends at certain point is called starvation. For example, low priority threads has to wait until 
+completing all high priority threads it may be long waiting but ends at certain point, which is nothing but 
+starvation.
