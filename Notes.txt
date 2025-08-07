@@ -209,6 +209,42 @@ notify() method then waiting thread will get that modification and continue its 
 **wait(), notify(), and notifyAll() methods present in Object class not in Thread class because thread can call 
 these methods on any java objects.
 
+To call wait(), notify(), and notifyAll() methods on any objects, thread should be a owner of that objects i.e, 
+thread should have lock of that object that is thread should be inside synchronized area.
 
+hence we can call wait(), notify(), and notifyAll() methods only from synchronized area otherwise we will get 
+RuntimeException :IllegalMonitorStateException.
 
+`If a thread calls wait() method on any object it immediately it releases the lock of that particular object and 
+enter into waiting state`
 
+If a thread calls notify() method on any object, it releases the lock of that object but may not immmediately
+except wait(), notify() and notifyAll() there is no other method where thread releases the lock.
+
+Every wait() throws InterruptedException which is checked exception hence, whever we are using wait() then 
+compulsotry we should handle these exception otherwise we will get compile time error. 
+
+->Example; ++ Producer-Consumer problem
+producer thread is reponsible to produce items to the queue and Consumer thread is responsible to consume items 
+from the queue. If queue is empty the consumer thread will call wait() and entered into waiting state after 
+producing items to the queue, producer thread is responsible to call notify() then waiting consumer will get the 
+notification and continue its execution with updated items
+
+Producer thread                                      |         Consumer Thread
+class ProducerThread{                                |     class ConsumerThread{
+    produce(){                                       |             consume(){
+        synchronized(q){                             |                 synchronized(q){
+            //produce items to the queue             |                     if(q.isEmpty())
+                q.notify();                          |                          q.wait();
+            }                                        |                     else
+    }                                                |                        //consume items
+}                                                    |                     }
+                                                     |                 } }
+
+We can use notify() method to give a notification for only one waiting thread if multiple thread are waiting then
+only one thread will be notified and the remaining threads have to wait for further notifications which thread 
+will be notified we can't expect it depends on JVM
+We can use notifyAll() to give the notification for all waiting threads of a particular objects. Eventhough 
+multiple threads are notifies but execution will be performed one by one because threads require lock and only 
+one lock is available.
+on which object we are calling wait() method thread requires lock of that particular object
