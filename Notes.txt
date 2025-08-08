@@ -260,3 +260,24 @@ Long waiting of a thread where waiting never ends is called deadlock whereas lon
 waiting ends at certain point is called starvation. For example, low priority threads has to wait until 
 completing all high priority threads it may be long waiting but ends at certain point, which is nothing but 
 starvation.
+
+----------------------Daemon Threads--------------------
+The threads which are executing in the background are called Daemon threads
+    Example;Garabage Collector, Signal Dispatcher , Attach Listener
+
+The main objective of Daemon threads is to provide support for non-Daemon threads(main thread). For example; if 
+main thread runs with low memory then JVM runs garbage collector to destroy useless objects so that no. of bits 
+of few memory improved with this free memory main thread can continue its execution.
+Usually, daemon threads having low priority but based on our requirement but daemon threads can run with high 
+priority also
+We can check daemon nature of a thread by using isDaemon() method of Thread class-public boolean isDaemon();
+We can change daemon nature of a thread by using setDaemon() method -public void setDaemon(boolean b); ,but 
+changing daemon nature is possible before starting of a thread only, after starting a thread if we are trying to 
+change daemon nature we will get runtimeException: IllegalThreadStateException.
+By default main thread is always non-Daemon and for all remaining threads daemon nature will be inherited from 
+parent to child i.e if parent thread is daemon then automatically child thread is also daemon and if parent 
+thread is not daemon then child thread is also not daemon.
+** it is impossible to change daemon nature of main thread because it is already started by JVM at begining.
+
+@whenever last non-daemon thread terminates automatically all daemon threads will be terminated irrespective of 
+their position.
