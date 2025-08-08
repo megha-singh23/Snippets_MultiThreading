@@ -280,4 +280,16 @@ thread is not daemon then child thread is also not daemon.
 ** it is impossible to change daemon nature of main thread because it is already started by JVM at begining.
 
 @whenever last non-daemon thread terminates automatically all daemon threads will be terminated irrespective of 
-their position.
+their position. 
+
+//Java Multithreading concept is implemented by using the following two models:
+1) Green Thread model-> The thread which is managed completely by JVM without taking underlined OS support is 
+called green thread. Very few operating systems like some Solaris provide support for green thread model anyway 
+green thread model is deprecated and not recommended to use.
+
+2) Native OS Model-> the thread which is managed by JVM with the help of underlined OS, is called Native OS model.
+All windows based operating system provide support for native OS model.
+
+Q} How to stop a thread?? we can stop a thread execution by using stop() method of a Thread class. If we call 
+stop() method then immediately the thread will enter into dead state. Eventhough stop() method is deprecated and 
+not recommended to use.

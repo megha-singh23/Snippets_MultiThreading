@@ -4,10 +4,11 @@ public class DaemonThreadDemo {
     public static void main(String[] args) {
         
         MyThread t=new MyThread();
-        t.setDaemon(true); //line 1
+        // t.setDaemon(true); //line 1
         t.start(); 
+        // t.stop(); throws exception
         System.out.println("end of main thread");
-
+        
 
         //If we are commenting line 1, then both main thread and child thread are not daemon and hence, both 
         // threads will be executed until their completion.
