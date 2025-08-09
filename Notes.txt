@@ -290,6 +290,24 @@ green thread model is deprecated and not recommended to use.
 2) Native OS Model-> the thread which is managed by JVM with the help of underlined OS, is called Native OS model.
 All windows based operating system provide support for native OS model.
 
-Q} How to stop a thread?? we can stop a thread execution by using stop() method of a Thread class. If we call 
+Q} How to stop a thread?? We can stop a thread execution by using stop() method of a Thread class. If we call 
 stop() method then immediately the thread will enter into dead state. Eventhough stop() method is deprecated and 
 not recommended to use.
+
+-------------------MultiThreading Enhancement--------------------------------------
+
+->Thread Group->
+ThreadGroup class present in java.lang package
+Based on functionality we can group threads into a single unit which is Thread group i.e, thread group contains
+a group of threads.
+In Addition to thread, thread group can also contain sub-threads groups.
+
+The main advantage of maintaining thread group is we can perform common operations very easily.
+
+Every thread in java belong to some Thread group, main thread belongs to main Group.
+Every thread group in java is the child group of system group either directly or indirectly. hence, system group
+ access root for all thread groups in java
+
+System group contains several system level threads like Finalizer, Reference Handler, Signal Dispatcher, Attach Listener
+
+The default max-priority is 10 of threads of Thread group.
