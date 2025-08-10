@@ -311,3 +311,58 @@ Every thread group in java is the child group of system group either directly or
 System group contains several system level threads like Finalizer, Reference Handler, Signal Dispatcher, Attach Listener
 
 The default max-priority is 10 of threads of Thread group.
+
+**The problems with traditional synchronized keyword :-
+1)We are not having any flexibility to try for a lock without waiting.
+2)There is no way to specify maximum waiting time for a thread to get lock so that thread will wait until getting
+the lock which may creates performance problem which may cause deadlock.
+3) If a thread releases the lock then which waiting thread will get that lock , we are not having any control on this.
+4) There is no API to list out all waiting threads for a lock.
+5)The synchronized keyword compulsory we have to use either at method level or within a method and it is not 
+possible to use accross multiple methods.
+
+===============================================================================================================
+
+To overcome these problems, some people introduce java.util.concurrent.locks package in 1.5 version.
+It also provide several enhancement to the programmer to provide more control on concurrency.
+
+-----------Lock Interface->
+    Lock object is similar to implicit lock acquired by a lock to execute synchronized method or synchronized block
+Lock implementation provide more extensive operation than traditional implicit locks.
+Important methods of lock interface: 
+   # void lock();- We can use this method to acquired a lock.If lock is already available then immediately 
+   current thread will get that lock. If the lock is not already available then it will wait until getting the 
+   lock. It is a exact a same behaviour of traditional syncronized keyword.
+
+   #boolean tryLock();- To acquire the lock without waiting. If the lock is available then the threads acquires
+   that lock and returns true. If the lock is not available then this method returns false and can continue its 
+   execution without waiting. In this case thread will never be entered into waiting state.
+   If(l.tryLock()){
+        perform safe operations
+   }
+   else{
+        perform alternative operations
+   }
+
+   #boolean tryLock(long time,Timeunit unit);- If lock is available the the thread will get the lock and continue
+   its execution. If the lock is not available then the thread will wait until specified amount of time still if 
+   the lock is not available then thread can continue its execution.
+   Time unit present in java.util.concurrent package. It is enum having NANOSECONS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS
+    If(l.tryLock(1,TimeUnit.HOURS))
+
+    #void lockInterruptibly();- acquires a lock if its is available and returns immediately.If the lock is not 
+    available then it will wait while waiting if the thread is interrupted then thread wouldn't get the thread.
+    
+    #void unlock();- To call this method compulsory current thread should be owner of the lock otherwise we will 
+    get RE: IllegalMonitorStateException.
+
+ ***ReentrantLock-> it is the implementation class of Lock Interface and it is direct child class of Object.
+    Reentrant means a thread can acquire same lock multiple times without any issue. Internally reentrant lock 
+    increments threads personal counts whenever we call lock() method and decrements count value whenever thread 
+    calls unlock() method and lock will be release whenever count reaches 0.
+
+Constructor--
+new ReentrantLock(boolean fairness):-If fairness is true then longest waiting thread can acquire the lock if its 
+available i.e it follows FIFO policy, if fairness is false then which waiting thread will get the chance we can't expect. The default value for fairness is false.
+
+

@@ -3,7 +3,6 @@ package MultiThreading.ThreadGroup;
 class Test{
 
     public static void main(String[] args) {
-        
 
         System.out.println(Thread.currentThread().getThreadGroup().getName()); //main thread belongs to main threadgroup
         System.out.println(Thread.currentThread().getThreadGroup().getParent().getName());
