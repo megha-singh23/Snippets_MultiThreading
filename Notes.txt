@@ -365,4 +365,49 @@ Constructor--
 new ReentrantLock(boolean fairness):-If fairness is true then longest waiting thread can acquire the lock if its 
 available i.e it follows FIFO policy, if fairness is false then which waiting thread will get the chance we can't expect. The default value for fairness is false.
 
+--------------**Thread Pools(Executor Framework)--------------------
 
+->Creating a new thread for every job may create performance and memory problems. 
+To overcome this we should go for Thread Pool.
+
+Thread Pool is a pool of already created threads ready to do our job.Java 1.5 version introduces Thread pool 
+Framework to implement Thread Pool.
+Thread pool framework also known as Executor framework.
+------------------------------------------------------------------------------------------------------
+We can create a thread pool as follows :=>  ExecutorService service=Executors.newFixedThreadPool(3); |
+We can submit a runnable job by using submit() method :=> service.submit(job);                       |
+We can shoutdown executor service by using shutdown() method :=> service.shutdown();                 |
+------------------------------------------------------------------------------------------------------
+
+Note-: While designing web servers and application servers, we can use Threadpool concept. 
+
+**Callable and Future-> 
+=========================
+
+In the case of runnable job thread won't return anything after completing the job. If thread is required to 
+return some result after execution then we should go for Callable.
+
+Callable interface contains only one method: public Object call() throws Exception{}. If we submit callable object 
+to executor then after completing the job thread return an Object of the type Future<> i.e, Future object can be 
+used to retrieve the result from callable job.
+
+difference b/w Runnable and Callable
+
+                  Runnable                             |     Callable
+                                                       |
+1) If a thread is not required to return anything after| If a thread required to return something after completing
+completing the job then we should go for Runnable      | the job then we should go for callable
+
+2) Runnable Interface contains one method: run()       | Callable Interface contains one method: call()
+
+3)Runnable job not required to return anything and     | Callable job is required to return something and hence,
+hence return type of run method is void                | return type of call method is Object
+
+4)within the run() method if there is any chance of    | Inside call() method if there is any chance of rising 
+rising checked Exception compulosry we should handle   | checked Exception we are not required to handle by try-catch
+by using try-catch because we cannot use throws keyword| beacuse call() method already throws Exception
+for run() method                                       |
+
+5)Runnable Interface is present in java.lang package   | Callable interface is present in java.util.concurrent package
+
+6)Introduced in 1.0 Version                            | Introduced in 1.5 Version
