@@ -411,3 +411,27 @@ for run() method                                       |
 5)Runnable Interface is present in java.lang package   | Callable interface is present in java.util.concurrent package
 
 6)Introduced in 1.0 Version                            | Introduced in 1.5 Version
+
+------ThreadLocal-------
+ThreadLocal Class provides thread local variables. ThreadLocal Class maintains values per thread basis.Each thread
+local object maintains a seperate value like userId, transactionId etc. for each thread that accesses that object.
+thread can access its local value, can manipulate its value and even can remove its value. In every part of the 
+code which is executed by the thread we can access its local variable.
+
+For Example; Consider a servlet which invokes some business methods, we have a requirement to generate to a 
+unique transaction Id for each and every request and we have to pass this transactionid to the business methods 
+for these requirement we can use ThreadLocal to maintain a seperate transactionId for every request i.e for every thread.
+
+Note:- Threa dLocal Class introduced in 1.2 version and enhanced in 1.5 version. ThreadLocal can be associated 
+with thread scope. Total code which is executed by that thread has access to the corressonding thread local 
+variables.A thread can access its own local variables and can't be access other threads local variables.Once 
+thread enter into dead state all its local variable are by default eligible for garbage collection.
+
+ThreadLocal Vs Inheritance
+
+    Parent thread's local variable by default not available to the child thread. If we want to make parent 
+    threads local value available to child thread then we should go for InheritableThreadLocal class. By default,
+    childs thread value is exactly same a s aparents thread value but we can provide customize value by overriding child value method
+
+InheritableThreadLocal is a child class of ThreadLocal and hence, all methods present in ThreadLocal by default. 
+available to InheritableThreadLocal. In addition all these method it contains ony one method:- public Object childVaue(Object parentValue);
