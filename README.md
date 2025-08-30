@@ -9,12 +9,11 @@ It covers both **basic** and **advanced** topics like thread creation, synchroni
 - ✅ Creating Threads (`Thread` class & `Runnable`)
 - ✅ Thread Lifecycle (`start()`, `run()`, `join()`)
 - ✅ Synchronization with `synchronized` keyword
-- ✅ Using **Locks** (`ReentrantLock`, `ReadWriteLock`)
+- ✅ Using **Locks** (`ReentrantLock`)
 - ✅ Handling **Deadlocks**
 - ✅ **Daemon Threads**
 - ✅ **ThreadGroup**
 - ✅ **Executor Framework** (`ExecutorService`, `ThreadPoolExecutor`, `Callable`, `Future`)
-- ✅ Concurrency Utilities (`CountDownLatch`, `CyclicBarrier`, etc.) *(if you included them)*
 
 ---
 
