@@ -1,15 +1,20 @@
-# Java Multithreading Snippet 🚀
+# Java Multithreading Snippets 🚀
 
-This repository contains a simple Java program demonstrating **multithreading concepts**.  
-It shows how multiple threads can run concurrently and how synchronization can be managed.
+This repository contains multiple Java examples demonstrating **multithreading and concurrency concepts**.  
+It covers both **basic** and **advanced** topics like thread creation, synchronization, deadlocks, daemon threads, `ExecutorService`, and more.
 
 ---
 
-## 📌 Features
-- Creation of threads using `Thread` class and `Runnable` interface.
-- Demonstrates thread lifecycle (`start()`, `run()`, `join()`).
-- Example of synchronization to avoid race conditions.
-- Prints thread execution order.
+## 📌 Concepts Covered
+- ✅ Creating Threads (`Thread` class & `Runnable`)
+- ✅ Thread Lifecycle (`start()`, `run()`, `join()`)
+- ✅ Synchronization with `synchronized` keyword
+- ✅ Using **Locks** (`ReentrantLock`, `ReadWriteLock`)
+- ✅ Handling **Deadlocks**
+- ✅ **Daemon Threads**
+- ✅ **ThreadGroup**
+- ✅ **Executor Framework** (`ExecutorService`, `ThreadPoolExecutor`, `Callable`, `Future`)
+- ✅ Concurrency Utilities (`CountDownLatch`, `CyclicBarrier`, etc.) *(if you included them)*
 
 ---
 
